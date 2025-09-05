@@ -12,51 +12,12 @@ COLOR_ACCENT = "#E0FFFF"    # LightCyan (quote box background)
 COLOR_BUTTON_TEXT = "#ffffff"
 
 # --------------------------- Fonts --------------------------- #
-H_FONT = ("Lucida Handwriting", 24, "bold")
-M_FONT = ("Lucida Handwriting", 20, "bold")
+H_FONT = ("Lucida Handwriting", 30, "bold")
+M_FONT = ("Lucida Handwriting", 18, "bold")
 S_FONT = ("Lucida Handwriting", 14, "bold")
 api_url = "https://zenquotes.io/api/random"
-PLACEHOLDER = "Hello !"
 
-# TODO 1: Create a Tkinter window with a title and set a reasonable size
-window = tk.Tk()
-window.title("Random Quotes")
-window.minsize(400, 400)
-window.config(padx=20, pady=20, bg = COLOR_BG )
-
-
-label1 = tk.Label(text="Random Quotes", font= H_FONT)
-label1.config(bg = COLOR_BG, fg= COLOR_TEXT, highlightthickness = 0, padx = 20, pady = 30, justify = "center")
-label1.grid(column=0, row=0,columnspan=2)
-
-# TODO 2: Add a large Label widget to display the quote text
-
-quote_label = tk.Label(text="Quote goes here", font= M_FONT)
-quote_label.config(bg=COLOR_BG, fg=COLOR_TEXT, wraplength=350, justify="center", padx=10, pady=10)
-quote_label.grid(column=0, row=1, columnspan=2)
-# TODO 3: Add a smaller Label widget below to display the author name
-
-author_label = tk.Label(text=PLACEHOLDER, font= S_FONT)
-author_label.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
-author_label.grid(column=1, row=2)
-
-# TODO 4: Add a Button widget labeled "New Quote"
-new_quote_btn = tk.Button(text="New Random Quote", font= S_FONT)
-new_quote_btn.config(
-    bg=COLOR_PRIMARY,
-    fg=COLOR_BUTTON_TEXT,
-    activebackground=COLOR_HIGHLIGHT,
-    activeforeground=COLOR_BUTTON_TEXT,
-    relief="groove",
-    bd=2,
-    padx=10,
-    pady=10,
-)
-#     relief="raised"
-# new_quote_btn.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
-new_quote_btn.grid(column=0, row=3, columnspan=2)
-# TODO 5: Write a function that makes a GET request to https://zenquotes.io/api/random
-
+# --------------------------- Function --------------------------- #
 def random_quote():
     try:
         new_quote_btn.config(text= "loading", state="disabled")
@@ -70,22 +31,64 @@ def random_quote():
         new_quote_btn.config(text = "New Random Quote",state="normal")
 
     except  requests.exceptions.RequestException as e:
-        quote_label.config("Failed to fetch quote. Please try again.")
-        author_label.config(e)
+        quote_label.config(text = "Failed to fetch quote. Please try again.")
+        author_label.config(text= e.__str__(), wraplength=350)
         window.update()
+        print(e.args)
         return e
 
-# TODO 6: Parse the JSON response to extract the quote ("q") and author ("a")
+# --------------------------- UI --------------------------- #
 
-# TODO 7: Update the quote and author Labels with the fetched data when the button is clicked
+
+window = tk.Tk()
+window.title("Random Quotes")
+window.minsize(400, 400)
+window.config(padx=20, pady=20, bg = COLOR_BG )
+
+
+label1 = tk.Label(text="Random Quotes", font= H_FONT)
+label1.config(bg = COLOR_BG, fg= COLOR_TEXT, highlightthickness = 0, padx = 20, pady = 30, justify = "center")
+label1.grid(column=0, row=0,columnspan=2)
+
+
+
+quote_label = tk.Label(text="Quote goes here", font= M_FONT)
+quote_label.config(bg=COLOR_BG, fg=COLOR_TEXT, wraplength=350, justify="center", padx=10, pady=10)
+quote_label.grid(column=0, row=1, columnspan=2)
+
+
+author_label = tk.Label(text="- Author", font= S_FONT)
+author_label.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
+author_label.grid(column=1, row=2)
+
+
+new_quote_btn = tk.Button(text="Get New Quote", font= S_FONT)
+new_quote_btn.config(
+    bg=COLOR_PRIMARY,
+    fg=COLOR_BUTTON_TEXT,
+    activebackground=COLOR_HIGHLIGHT,
+    activeforeground=COLOR_BUTTON_TEXT,
+    relief="groove",
+    bd=2,
+    padx=10,
+    pady=10,
+)
+#     relief="raised"
+# new_quote_btn.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
+new_quote_btn.grid(column=0, row=3, columnspan=2, pady = (30,5))
+
+
+credit_label = tk.Label(
+    window,
+    text="Quotes provided by zenquotes.io",
+    font=("Arial", 10),
+    bg=COLOR_BG,
+    fg=COLOR_TEXT
+)
+credit_label.grid(column=0, row=4, columnspan=2)
+
+random_quote()
+
 new_quote_btn.configure(command=random_quote)
-# TODO 8: Disable the button and change its text to "Loading..." while fetching data
-# TODO 9: Re-enable the button and reset its text after the data is fetched or if an error occurs
-# TODO 10: Handle errors gracefully (network issues, JSON parsing errors) and display a friendly message in the UI
-# TODO 11 (Optional): Style the labels and window for better readability (fonts, colors, padding)
-# TODO 12 (Optional): Test the app by clicking the button multiple times and with no internet connection to check error handling
-
-
-
 
 window.mainloop()
