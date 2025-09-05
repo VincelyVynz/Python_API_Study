@@ -5,10 +5,10 @@ import requests
 
 # --------------------------- Color Palette --------------------------- #
 COLOR_BG = "#AFEEEE"        # PaleTurquoise
-COLOR_PRIMARY = "#87CEFA"   # LightSkyBlue (button background)
-COLOR_HIGHLIGHT = "#20B2AA" # LightSeaGreen (hover / active background)
-COLOR_TEXT = "#2F4F4F"      # DarkSlateGray (text color)
-COLOR_ACCENT = "#E0FFFF"    # LightCyan (quote box background)
+COLOR_PRIMARY = "#87CEFA"   # LightSkyBlue
+COLOR_HIGHLIGHT = "#20B2AA" # LightSeaGreen
+COLOR_TEXT = "#2F4F4F"      # DarkSlateGray
+COLOR_ACCENT = "#E0FFFF"    # LightCyan
 COLOR_BUTTON_TEXT = "#ffffff"
 
 # --------------------------- Fonts --------------------------- #
