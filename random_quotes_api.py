@@ -31,8 +31,9 @@ def random_quote():
         new_quote_btn.config(text = "New Random Quote",state="normal")
 
     except  requests.exceptions.RequestException as e:
-        quote_label.config(text = "Failed to fetch quote. Please try again.")
-        author_label.config(text= e.__str__(), wraplength=350)
+        quote_label.config(text="Failed to fetch quote. Please try again.")
+        author_label.config(text="Connection error. Please check your internet.", wraplength=350)
+        new_quote_btn.config(text="Get New Quote", state="normal")
         window.update()
         print(e.args)
         return e
@@ -52,13 +53,13 @@ label1.grid(column=0, row=0,columnspan=2)
 
 
 
-quote_label = tk.Label(text="Quote goes here", font= M_FONT)
+quote_label = tk.Label(text="Quote loading", font= M_FONT)
 quote_label.config(bg=COLOR_BG, fg=COLOR_TEXT, wraplength=350, justify="center", padx=10, pady=10)
 quote_label.grid(column=0, row=1, columnspan=2)
 
 
-author_label = tk.Label(text="- Author", font= S_FONT)
-author_label.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
+author_label = tk.Label(text="- Author loading", font= S_FONT)
+author_label.config(bg = COLOR_BG, highlightthickness = 0, padx = 10, pady = 10)
 author_label.grid(column=1, row=2)
 
 
@@ -87,7 +88,8 @@ credit_label = tk.Label(
 )
 credit_label.grid(column=0, row=4, columnspan=2)
 
-random_quote()
+window.after(100, random_quote)
+
 
 new_quote_btn.configure(command=random_quote)
 
