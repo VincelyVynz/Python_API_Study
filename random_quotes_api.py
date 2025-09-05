@@ -46,6 +46,7 @@ window.title("Random Quotes")
 window.minsize(400, 400)
 window.config(padx=20, pady=20, bg = COLOR_BG )
 
+# --------------------------- Labels --------------------------- #
 
 label1 = tk.Label(text="Random Quotes", font= H_FONT)
 label1.config(bg = COLOR_BG, fg= COLOR_TEXT, highlightthickness = 0, padx = 20, pady = 30, justify = "center")
@@ -62,6 +63,7 @@ author_label = tk.Label(text="- Author loading", font= S_FONT)
 author_label.config(bg = COLOR_BG, highlightthickness = 0, padx = 10, pady = 10)
 author_label.grid(column=1, row=2)
 
+# --------------------------- Button --------------------------- #
 
 new_quote_btn = tk.Button(text="Get New Quote", font= S_FONT)
 new_quote_btn.config(
@@ -74,10 +76,10 @@ new_quote_btn.config(
     padx=10,
     pady=10,
 )
-#     relief="raised"
-# new_quote_btn.config(bg = "PaleTurquoise", highlightthickness = 0, padx = 10, pady = 10)
+
 new_quote_btn.grid(column=0, row=3, columnspan=2, pady = (30,5))
 
+# --------------------------- Credits --------------------------- #
 
 credit_label = tk.Label(
     window,
