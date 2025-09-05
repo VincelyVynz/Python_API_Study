@@ -1,5 +1,15 @@
 # ------------------------------ API Study ------------------------------ #
 
+"""
+This script takes a name as input and uses three public APIs to predict:
+- Age (Agify API)
+- Gender (Genderize API)
+- Nationality (Nationalize API)
+
+It then prints out the predicted information based on the given name.
+"""
+
+
 import requests, pycountry
 
 params = {
